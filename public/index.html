@@ -715,6 +715,7 @@
                     <p id="gameMessageText"></p>
                 </div>
                 
+                <div class="modal-backdrop" id="gameCompleteBackdrop" style="display: none;"></div>
                 <div class="game-complete" id="gameComplete" style="display: none;">
                     <div class="complete-icon"><i class="fas fa-trophy"></i></div>
                     <h3>Você Escapou da Névoa!</h3>
@@ -732,7 +733,9 @@
                     </div>
                 </div>
                 
+                <div class="modal-backdrop" id="gameLostBackdrop" style="display: none;"></div>
                 <div class="game-lost" id="gameLost" style="display: none;">
+                    <button class="modal-close-btn" onclick="window.closeGameModal()"><i class="fas fa-times"></i></button>
                     <div class="complete-icon lost"><i class="fas fa-cloud"></i></div>
                     <h3>A Névoa Venceu...</h3>
                     <p>As influências foram muito fortes, mas você pode tentar novamente!</p>

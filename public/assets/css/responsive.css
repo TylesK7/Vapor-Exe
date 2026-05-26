@@ -227,10 +227,13 @@
     
     .game-board {
         padding: 15px;
+        overflow-x: auto;
     }
     
     #gameCanvas {
-        height: 300px;
+        min-height: 250px;
+        max-height: 350px;
+        max-width: 100%;
     }
     
     .mobile-controls {
@@ -530,11 +533,14 @@
     
     .flip-card {
         height: 300px;
+        -webkit-perspective: 1000px;
     }
     
     .flip-card-front,
     .flip-card-back {
         padding: 20px;
+        -webkit-transform-origin: center;
+        transform-origin: center;
     }
     
     .flip-card-front .card-icon {

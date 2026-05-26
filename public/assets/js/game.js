@@ -5,8 +5,24 @@
 
 (function() {
     // ==================== CONSTANTES ====================
-    const CANVAS_WIDTH = 600;
-    const CANVAS_HEIGHT = 400;
+    let CANVAS_WIDTH = 600;
+    let CANVAS_HEIGHT = 400;
+    
+    // Ajustar tamanho para mobile
+    function adjustCanvasSize() {
+        const canvas = document.getElementById('gameCanvas');
+        if (!canvas) return;
+        
+        const container = canvas.parentElement;
+        const maxWidth = Math.min(600, window.innerWidth - 40);
+        const aspectRatio = 400 / 600;
+        
+        CANVAS_WIDTH = maxWidth;
+        CANVAS_HEIGHT = Math.round(maxWidth * aspectRatio);
+        
+        canvas.width = CANVAS_WIDTH;
+        canvas.height = CANVAS_HEIGHT;
+    }
     const PLAYER_SIZE = 20;
     const PLAYER_SPEED = 4;
     const GOAL_WIDTH = 50;
@@ -144,6 +160,9 @@
     function initGame() {
         canvas = document.getElementById('gameCanvas');
         if (!canvas) return;
+        
+        // Ajustar tamanho do canvas para responsividade
+        adjustCanvasSize();
         
         ctx = canvas.getContext('2d');
         
@@ -292,11 +311,15 @@
         const mobileControls = document.getElementById('mobileControls');
         const gameComplete = document.getElementById('gameComplete');
         const gameLost = document.getElementById('gameLost');
+        const gameCompleteBackdrop = document.getElementById('gameCompleteBackdrop');
+        const gameLostBackdrop = document.getElementById('gameLostBackdrop');
         
         if (gameStart) gameStart.style.display = 'none';
         if (mobileControls) mobileControls.style.display = 'flex';
         if (gameComplete) gameComplete.style.display = 'none';
         if (gameLost) gameLost.style.display = 'none';
+        if (gameCompleteBackdrop) gameCompleteBackdrop.style.display = 'none';
+        if (gameLostBackdrop) gameLostBackdrop.style.display = 'none';
         
         // Update UI
         updateUI();
@@ -597,7 +620,7 @@
         }
         
         document.getElementById('mobileControls').style.display = 'none';
-        document.getElementById('gameComplete').style.display = 'block';
+        window.showGameModal('complete');
         document.getElementById('finalTime').textContent = `${gameTime}s`;
         document.getElementById('finalCollisions').textContent = collisions;
         
@@ -625,10 +648,10 @@
         
         const gameLost = document.getElementById('gameLost');
         if (gameLost) {
-            gameLost.style.display = 'block';
+            window.showGameModal('lost');
         } else {
             // Fallback: mostra no gameComplete com mensagem de derrota
-            document.getElementById('gameComplete').style.display = 'block';
+            window.showGameModal('complete');
             const completeTitle = document.querySelector('#gameComplete h3');
             if (completeTitle) {
                 completeTitle.textContent = 'A Névoa Venceu...';
@@ -640,6 +663,67 @@
     // Expõe função para reiniciar
     window.restartVaporGame = startGame;
 
+    // Funções para gerenciar modal
+    window.showGameModal = function(type = 'complete') {
+        const modal = type === 'complete' ? document.getElementById('gameComplete') : document.getElementById('gameLost');
+        const backdrop = type === 'complete' ? document.getElementById('gameCompleteBackdrop') : document.getElementById('gameLostBackdrop');
+        
+        if (modal) modal.style.display = 'flex';
+        if (backdrop) backdrop.style.display = 'block';
+    };
+
+    window.closeGameModal = function() {
+        const gameComplete = document.getElementById('gameComplete');
+        const gameLost = document.getElementById('gameLost');
+        const gameCompleteBackdrop = document.getElementById('gameCompleteBackdrop');
+        const gameLostBackdrop = document.getElementById('gameLostBackdrop');
+        const gameStart = document.getElementById('gameStart');
+        
+        if (gameComplete) gameComplete.style.display = 'none';
+        if (gameLost) gameLost.style.display = 'none';
+        if (gameCompleteBackdrop) gameCompleteBackdrop.style.display = 'none';
+        if (gameLostBackdrop) gameLostBackdrop.style.display = 'none';
+        if (gameStart) gameStart.style.display = 'flex';
+        
+        // Reset game state
+        gameRunning = false;
+        gameState = 'menu';
+    };
+
+    // Fechar modal ao clicar no backdrop
+    document.addEventListener('DOMContentLoaded', function() {
+        const gameCompleteBackdrop = document.getElementById('gameCompleteBackdrop');
+        const gameLostBackdrop = document.getElementById('gameLostBackdrop');
+        
+        if (gameCompleteBackdrop) {
+            gameCompleteBackdrop.addEventListener('click', window.closeGameModal);
+        }
+        if (gameLostBackdrop) {
+            gameLostBackdrop.addEventListener('click', window.closeGameModal);
+        }
+        
+        // Fechar modal com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const gameComplete = document.getElementById('gameComplete');
+                const gameLost = document.getElementById('gameLost');
+                if (gameComplete && gameComplete.style.display === 'flex') {
+                    window.closeGameModal();
+                }
+                if (gameLost && gameLost.style.display === 'flex') {
+                    window.closeGameModal();
+                }
+            }
+        });
+    });
+
     // Initialize on DOM ready
     document.addEventListener('DOMContentLoaded', initGame);
+    
+    // Ajustar canvas quando a janela redimensiona
+    window.addEventListener('resize', () => {
+        if (canvas) {
+            adjustCanvasSize();
+        }
+    });
 })();
