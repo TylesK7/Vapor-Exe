@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vapor.exe - Quando o perigo ganha design</title>
+    <meta name="description" content="Uma experiência digital de investigação sobre cigarro eletrônico vs cigarro convencional. Conscientização através de tecnologia.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Splide.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body class="loading">
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Progress Bar -->
+    <div class="progress-container" id="progressContainer">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span class="progress-text" id="progressText">Investigação: 0% concluída</span>
+    </div>
+
+    <!-- VAPOR-BOT -->
+    <div class="vapor-bot" id="vaporBot">
+        <div class="bot-icon" id="botIcon">
+            <i class="fas fa-robot"></i>
+            <span class="bot-pulse"></span>
+        </div>
+        <div class="bot-panel" id="botPanel">
+            <div class="bot-header">
+                <span class="bot-name">VAPOR-BOT</span>
+                <button class="bot-close" id="botClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="bot-content" id="botContent">
+                <p class="bot-message">Olá! Sou o VAPOR-BOT. Estou aqui para guiar sua investigação.</p>
+            </div>
+            <div class="bot-actions">
+                <button class="bot-btn" data-action="tip"><i class="fas fa-lightbulb"></i> Dica</button>
+                <button class="bot-btn" data-action="explain"><i class="fas fa-info-circle"></i> Explicar</button>
+                <button class="bot-btn" data-action="progress"><i class="fas fa-chart-line"></i> Progresso</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility Controls -->
+    <div class="accessibility-controls" id="accessibilityControls">
+        <button class="acc-btn" id="toggleSound" title="Som">
+            <i class="fas fa-volume-up"></i>
+        </button>
+        <button class="acc-btn" id="toggleAnimations" title="Animações">
+            <i class="fas fa-magic"></i>
+        </button>
+        <button class="acc-btn" id="toggleContrast" title="Alto Contraste">
+            <i class="fas fa-adjust"></i>
+        </button>
+        <button class="acc-btn" id="increaseFont" title="Aumentar Fonte">
+            <i class="fas fa-plus"></i>
+        </button>
+        <button class="acc-btn" id="decreaseFont" title="Diminuir Fonte">
+            <i class="fas fa-minus"></i>
+        </button>
+    </div>
+
+    <!-- Achievements Notification -->
+    <div class="achievement-notification" id="achievementNotification">
+        <div class="achievement-icon"><i class="fas fa-trophy"></i></div>
+        <div class="achievement-text">
+            <span class="achievement-title">Conquista Desbloqueada!</span>
+            <span class="achievement-name" id="achievementName"></span>
+        </div>
+    </div>
+
+    <!-- ==================== SECTION 1: HERO ==================== -->
+    <section class="hero-section" id="heroSection">
+        <div class="hero-content">
+            <div class="system-boot" id="systemBoot">
+                <div class="boot-line" data-delay="0">
+                    <span class="prompt">&gt;</span> Inicializando Vapor.exe...
+                </div>
+                <div class="boot-line" data-delay="500">
+                    <span class="prompt">&gt;</span> Sistema de conscientização carregado.
+                </div>
+                <div class="boot-line" data-delay="1000">
+                    <span class="prompt">&gt;</span> Módulos de investigação: <span class="status-ok">OK</span>
+                </div>
+                <div class="boot-line" data-delay="1500">
+                    <span class="prompt">&gt;</span> Missão: investigar como aparência, sabor, tecnologia e influência social podem esconder riscos.
+                </div>
+                <div class="boot-line" data-delay="2000">
+                    <span class="prompt">&gt;</span> Status: <span class="status-ready">PRONTO</span>
+                </div>
+            </div>
+            
+            <div class="hero-title-container" id="heroTitle">
+                <h1 class="glitch-text" data-text="VAPOR.EXE">VAPOR.EXE</h1>
+                <p class="hero-subtitle">Quando o perigo ganha design</p>
+            </div>
+            
+            <p class="hero-quote" id="heroQuote">
+                "Nem todo perigo vem com cheiro de fumaça.<br>
+                Alguns vêm com sabor, LED e neon."
+            </p>
+            
+            <button class="btn-start" id="btnStart">
+                <span class="btn-text">Iniciar Investigação</span>
+                <span class="btn-icon"><i class="fas fa-terminal"></i></span>
+                <div class="btn-glow"></div>
+            </button>
+        </div>
+        
+        <div class="scroll-indicator" id="scrollIndicator">
+            <span>Scroll</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 2: INITIAL CHOICE ==================== -->
+    <section class="section choice-section" id="choiceSection">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FASE 0</span>
+                <h2 class="section-title">Qual dos dois parece mais perigoso?</h2>
+                <p class="section-desc">Sua primeira impressão será registrada pelo sistema.</p>
+            </div>
+            
+            <div class="choice-cards">
+                <div class="choice-card conventional" id="cardConventional" data-tilt>
+                    <div class="choice-visual">
+                        <div class="smoke-effect"></div>
+                        <i class="fas fa-smoking"></i>
+                    </div>
+                    <h3>Cigarro Convencional</h3>
+                    <p>Visual cinza, fumaça visível, textura antiga</p>
+                </div>
+                
+                <div class="choice-card electronic" id="cardElectronic" data-tilt>
+                    <div class="choice-visual">
+                        <div class="led-effect"></div>
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Cigarro Eletrônico</h3>
+                    <p>Visual neon, moderno, tecnológico</p>
+                </div>
+            </div>
+            
+            <div class="choice-options" id="choiceOptions">
+                <button class="choice-btn" data-choice="conventional">Cigarro convencional</button>
+                <button class="choice-btn" data-choice="electronic">Cigarro eletrônico</button>
+                <button class="choice-btn" data-choice="both">Os dois</button>
+                <button class="choice-btn" data-choice="unknown">Não sei</button>
+            </div>
+            
+            <div class="choice-result" id="choiceResult">
+                <div class="result-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                <p class="result-text">Sua escolha pode ter sido influenciada pela aparência. É exatamente isso que o <strong>Vapor.exe</strong> vai investigar.</p>
+                <button class="btn-continue" id="btnContinueChoice">Continuar Investigação <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 3: PROPAGANDA VS REALITY ==================== -->
+    <section class="section cards-section" id="cardsSection">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FASE 1: APARÊNCIA</span>
+                <h2 class="section-title">Propaganda vs Realidade</h2>
+                <p class="section-desc">Clique nos cards para revelar o que está por trás da aparência.</p>
+            </div>
+            
+            <div class="flip-cards-grid">
+                <!-- Card 1 -->
+                <div class="flip-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="card-icon"><i class="fas fa-candy-cane"></i></div>
+                            <h3>Sabor doce</h3>
+                            <p>Parece leve.<br>Parece inofensivo.<br>Parece só diversão.</p>
+                            <span class="flip-hint"><i class="fas fa-hand-pointer"></i> Clique para ver a realidade</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Realidade</h3>
+                            <p>Sabor não significa segurança. Um gosto agradável pode diminuir a percepção de risco e aumentar a curiosidade.</p>
+                            <div class="card-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Influência visual</span>
+                                    <div class="stat-bar"><div class="stat-fill" style="width: 85%"></div></div>
+                                    <span class="stat-value">85%</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Percepção de risco</span>
+                                    <div class="stat-bar risk"><div class="stat-fill" style="width: 25%"></div></div>
+                                    <span class="stat-value">25%</span>
+                                </div>
+                            </div>
+                            <span class="alert-badge high">Alerta: Alto</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="flip-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="card-icon"><i class="fas fa-microchip"></i></div>
+                            <h3>Design moderno</h3>
+                            <p>Parece tecnologia.<br>Parece limpo.<br>Parece seguro.</p>
+                            <span class="flip-hint"><i class="fas fa-hand-pointer"></i> Clique para ver a realidade</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Realidade</h3>
+                            <p>O corpo não vê design. Ele reage às substâncias inaladas, não à aparência do produto.</p>
+                            <div class="card-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Influência visual</span>
+                                    <div class="stat-bar"><div class="stat-fill" style="width: 90%"></div></div>
+                                    <span class="stat-value">90%</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Percepção de risco</span>
+                                    <div class="stat-bar risk"><div class="stat-fill" style="width: 30%"></div></div>
+                                    <span class="stat-value">30%</span>
+                                </div>
+                            </div>
+                            <span class="alert-badge high">Alerta: Alto</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="flip-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="card-icon"><i class="fas fa-wind"></i></div>
+                            <h3>Sem cheiro forte</h3>
+                            <p>Parece menos incômodo.<br>Parece menos perigoso.</p>
+                            <span class="flip-hint"><i class="fas fa-hand-pointer"></i> Clique para ver a realidade</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Realidade</h3>
+                            <p>Nem todo risco tem cheiro. A ausência de cheiro forte não significa ausência de impacto.</p>
+                            <div class="card-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Influência visual</span>
+                                    <div class="stat-bar"><div class="stat-fill" style="width: 70%"></div></div>
+                                    <span class="stat-value">70%</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Percepção de risco</span>
+                                    <div class="stat-bar risk"><div class="stat-fill" style="width: 35%"></div></div>
+                                    <span class="stat-value">35%</span>
+                                </div>
+                            </div>
+                            <span class="alert-badge medium">Alerta: Médio</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 4 -->
+                <div class="flip-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="card-icon"><i class="fas fa-hand-peace"></i></div>
+                            <h3>É só uma vez</h3>
+                            <p>Parece uma escolha pequena.<br>Parece algo sem consequência.</p>
+                            <span class="flip-hint"><i class="fas fa-hand-pointer"></i> Clique para ver a realidade</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Realidade</h3>
+                            <p>Muitos hábitos começam parecendo inofensivos. A curiosidade pode abrir caminho para repetição e dependência.</p>
+                            <div class="card-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Influência social</span>
+                                    <div class="stat-bar"><div class="stat-fill" style="width: 80%"></div></div>
+                                    <span class="stat-value">80%</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Risco de repetição</span>
+                                    <div class="stat-bar risk"><div class="stat-fill" style="width: 75%"></div></div>
+                                    <span class="stat-value">75%</span>
+                                </div>
+                            </div>
+                            <span class="alert-badge high">Alerta: Alto</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 5 -->
+                <div class="flip-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="card-icon"><i class="fas fa-users"></i></div>
+                            <h3>Todo mundo usa</h3>
+                            <p>Parece normal.<br>Parece aceito.<br>Parece menos preocupante.</p>
+                            <span class="flip-hint"><i class="fas fa-hand-pointer"></i> Clique para ver a realidade</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Realidade</h3>
+                            <p>Popularidade não é prova de segurança. Às vezes, é apenas influência social.</p>
+                            <div class="card-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Pressão social</span>
+                                    <div class="stat-bar"><div class="stat-fill" style="width: 88%"></div></div>
+                                    <span class="stat-value">88%</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Pensamento crítico</span>
+                                    <div class="stat-bar risk"><div class="stat-fill" style="width: 40%"></div></div>
+                                    <span class="stat-value">40%</span>
+                                </div>
+                            </div>
+                            <span class="alert-badge high">Alerta: Alto</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 6 -->
+                <div class="flip-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="card-icon"><i class="fas fa-mask"></i></div>
+                            <h3>Não parece cigarro</h3>
+                            <p>Parece outra coisa.<br>Parece moderno.<br>Parece distante do cigarro comum.</p>
+                            <span class="flip-hint"><i class="fas fa-hand-pointer"></i> Clique para ver a realidade</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Realidade</h3>
+                            <p>Mudar a aparência não muda o alerta. O risco pode estar escondido na névoa.</p>
+                            <div class="card-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Disfarce visual</span>
+                                    <div class="stat-bar"><div class="stat-fill" style="width: 92%"></div></div>
+                                    <span class="stat-value">92%</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Percepção de perigo</span>
+                                    <div class="stat-bar risk"><div class="stat-fill" style="width: 28%"></div></div>
+                                    <span class="stat-value">28%</span>
+                                </div>
+                            </div>
+                            <span class="alert-badge high">Alerta: Alto</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="reality-mode-container">
+                <button class="btn-reality" id="btnReality">
+                    <i class="fas fa-eye"></i> Ativar Modo Realidade
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reality Mode Overlay -->
+    <div class="reality-overlay" id="realityOverlay">
+        <div class="reality-words">
+            <span class="reality-word" style="--delay: 0.1s;">dependência</span>
+            <span class="reality-word" style="--delay: 0.3s;">influência</span>
+            <span class="reality-word" style="--delay: 0.5s;">aerossol</span>
+            <span class="reality-word" style="--delay: 0.7s;">descarte</span>
+            <span class="reality-word" style="--delay: 0.9s;">marketing</span>
+            <span class="reality-word" style="--delay: 1.1s;">nicotina</span>
+            <span class="reality-word" style="--delay: 1.3s;">risco</span>
+            <span class="reality-word" style="--delay: 1.5s;">falsa segurança</span>
+        </div>
+        <div class="reality-message">
+            <h3>O design mudou. A informação apareceu.</h3>
+            <button class="btn-close-reality" id="btnCloseReality">Fechar</button>
+        </div>
+    </div>
+
+    <!-- ==================== SECTION 4: SCANNER DE MENTIRAS ==================== -->
+    <section class="section scanner-section" id="scannerSection">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FASE 2: SCANNER DE MENTIRAS</span>
+                <h2 class="section-title">Análise de Afirmações</h2>
+                <p class="section-desc">Identifique se cada afirmação é verdade, farsa ou meia verdade.</p>
+            </div>
+            
+            <div class="scanner-machine">
+                <div class="scanner-screen">
+                    <div class="scanner-header">
+                        <span class="scanner-status"><i class="fas fa-satellite-dish"></i> SCANNER ATIVO</span>
+                        <div class="scanner-score">
+                            <span class="score-item"><i class="fas fa-check"></i> Acertos: <span id="scannerCorrect">0</span></span>
+                            <span class="score-item"><i class="fas fa-times"></i> Erros: <span id="scannerWrong">0</span></span>
+                            <span class="score-item"><i class="fas fa-percentage"></i> Precisão: <span id="scannerAccuracy">0%</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="scanner-content" id="scannerContent">
+                        <div class="scanner-statement" id="scannerStatement">
+                            <span class="statement-number">01/08</span>
+                            <p class="statement-text" id="statementText">Vape é só vapor d'água.</p>
+                        </div>
+                        
+                        <div class="scanner-buttons">
+                            <button class="scan-btn truth" data-answer="truth">
+                                <i class="fas fa-check-circle"></i> Verdade
+                            </button>
+                            <button class="scan-btn lie" data-answer="lie">
+                                <i class="fas fa-times-circle"></i> Farsa
+                            </button>
+                            <button class="scan-btn half" data-answer="half">
+                                <i class="fas fa-exclamation-circle"></i> Meia Verdade
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="scanner-complete" id="scannerComplete" style="display: none;">
+                        <div class="complete-icon"><i class="fas fa-clipboard-check"></i></div>
+                        <h3>Scanner Concluído!</h3>
+                        <p>Precisão da investigação: <span id="finalAccuracy">0%</span></p>
+                        <button class="btn-continue" id="btnContinueScanner">Próxima Fase <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+                
+                <div class="scanner-decoration">
+                    <div class="scan-line"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 5: FIREWALL DA CONSCIÊNCIA ==================== -->
+    <section class="section firewall-section" id="firewallSection">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FASE 3: FIREWALL DA CONSCIÊNCIA</span>
+                <h2 class="section-title">Detector de Frases Enganosas</h2>
+                <p class="section-desc">Identifique qual técnica de persuasão está sendo usada em cada frase.</p>
+            </div>
+            
+            <div class="firewall-container">
+                <div class="firewall-display">
+                    <div class="firewall-phrase" id="firewallPhrase">
+                        <span class="phrase-number">01/07</span>
+                        <p class="phrase-text" id="phraseText">"Relaxa, é só saborzinho."</p>
+                    </div>
+                    
+                    <div class="technique-options" id="techniqueOptions">
+                        <button class="technique-btn" data-technique="falsa-seguranca">Falsa segurança</button>
+                        <button class="technique-btn" data-technique="pressao-social">Pressão social</button>
+                        <button class="technique-btn" data-technique="marketing">Marketing</button>
+                        <button class="technique-btn" data-technique="generalizacao">Generalização</button>
+                        <button class="technique-btn" data-technique="curiosidade">Curiosidade</button>
+                        <button class="technique-btn" data-technique="disfarce-visual">Disfarce visual</button>
+                        <button class="technique-btn" data-technique="atracao-sabor">Atração por sabor</button>
+                        <button class="technique-btn" data-technique="minimizacao">Minimização do risco</button>
+                    </div>
+                </div>
+                
+                <div class="firewall-complete" id="firewallComplete" style="display: none;">
+                    <div class="complete-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Firewall Calibrado!</h3>
+                    <p>Você identificou as técnicas de manipulação com sucesso.</p>
+                    <button class="btn-continue" id="btnContinueFirewall">Próxima Fase <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 6: MEDIDOR DE INFLUÊNCIA ==================== -->
+    <section class="section influence-section" id="influenceSection">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FASE 4: MEDIDOR DE INFLUÊNCIA</span>
+                <h2 class="section-title">Calibre os Fatores</h2>
+                <p class="section-desc">Ajuste os sliders para ver como cada fator pode influenciar a percepção.</p>
+            </div>
+            
+            <div class="influence-container">
+                <div class="sliders-panel">
+                    <div class="slider-group">
+                        <label>
+                            <i class="fas fa-palette"></i> Cor chamativa
+                            <span class="slider-value" id="val-color">50</span>
+                        </label>
+                        <input type="range" class="influence-slider" id="slider-color" min="0" max="100" value="50">
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label>
+                            <i class="fas fa-cookie-bite"></i> Sabor doce
+                            <span class="slider-value" id="val-flavor">50</span>
+                        </label>
+                        <input type="range" class="influence-slider" id="slider-flavor" min="0" max="100" value="50">
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label>
+                            <i class="fas fa-lightbulb"></i> Luz LED
+                            <span class="slider-value" id="val-led">50</span>
+                        </label>
+                        <input type="range" class="influence-slider" id="slider-led" min="0" max="100" value="50">
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label>
+                            <i class="fas fa-cogs"></i> Design tecnológico
+                            <span class="slider-value" id="val-design">50</span>
+                        </label>
+                        <input type="range" class="influence-slider" id="slider-design" min="0" max="100" value="50">
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label>
+                            <i class="fas fa-wind"></i> Ausência de cheiro
+                            <span class="slider-value" id="val-smell">50</span>
+                        </label>
+                        <input type="range" class="influence-slider" id="slider-smell" min="0" max="100" value="50">
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label>
+                            <i class="fas fa-user-friends"></i> Pressão dos amigos
+                            <span class="slider-value" id="val-friends">50</span>
+                        </label>
+                        <input type="range" class="influence-slider" id="slider-friends" min="0" max="100" value="50">
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label>
+                            <i class="fas fa-hashtag"></i> Influência de redes sociais
+                            <span class="slider-value" id="val-social">50</span>
+                        </label>
+                        <input type="range" class="influence-slider" id="slider-social" min="0" max="100" value="50">
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label>
+                            <i class="fas fa-flask"></i> Informação científica
+                            <span class="slider-value" id="val-science">50</span>
+                        </label>
+                        <input type="range" class="influence-slider" id="slider-science" min="0" max="100" value="50">
+                    </div>
+                </div>
+                
+                <div class="results-panel">
+                    <div class="chart-container">
+                        <canvas id="influenceChart"></canvas>
+                    </div>
+                    
+                    <div class="influence-metrics">
+                        <div class="metric">
+                            <span class="metric-label">Influência Visual</span>
+                            <div class="metric-bar">
+                                <div class="metric-fill" id="metricVisual" style="width: 50%"></div>
+                            </div>
+                            <span class="metric-value" id="metricVisualValue">50%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Percepção de Risco</span>
+                            <div class="metric-bar risk">
+                                <div class="metric-fill" id="metricRisk" style="width: 50%"></div>
+                            </div>
+                            <span class="metric-value" id="metricRiskValue">50%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Consciência Crítica</span>
+                            <div class="metric-bar critical">
+                                <div class="metric-fill" id="metricCritical" style="width: 50%"></div>
+                            </div>
+                            <span class="metric-value" id="metricCriticalValue">50%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="influence-message">
+                        <p>"Quanto mais bonito o produto parece, mais fácil é esquecer de questionar."</p>
+                        <p class="sub-message">"Aparência pode mudar percepção, mas não transforma algo em seguro."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 7: SIMULADOR DE ESCOLHA ==================== -->
+    <section class="section simulator-section" id="simulatorSection">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FASE 4.5: SIMULADOR SOCIAL</span>
+                <h2 class="section-title">E se acontecesse com você?</h2>
+                <p class="section-desc">Veja como suas escolhas podem fazer diferença em situações reais.</p>
+            </div>
+            
+            <div class="simulator-container" id="simulatorContainer">
+                <div class="situation-card" id="situationCard">
+                    <div class="situation-header">
+                        <span class="situation-number">Situação 1/2</span>
+                        <div class="situation-icon"><i class="fas fa-users"></i></div>
+                    </div>
+                    <p class="situation-text" id="situationText">
+                        "Você está com amigos e alguém diz: 'Relaxa, é só saborzinho.'"
+                    </p>
+                    <div class="situation-options" id="situationOptions">
+                        <button class="situation-btn" data-option="0">Aceitar sem perguntar</button>
+                        <button class="situation-btn" data-option="1">Recusar</button>
+                        <button class="situation-btn" data-option="2">Perguntar o que tem dentro</button>
+                        <button class="situation-btn" data-option="3">Mudar de assunto</button>
+                    </div>
+                </div>
+                
+                <div class="simulator-complete" id="simulatorComplete" style="display: none;">
+                    <div class="complete-icon"><i class="fas fa-brain"></i></div>
+                    <h3>Simulação Concluída!</h3>
+                    <p class="final-message">Design atrativo pode influenciar a primeira impressão. Pensar antes de aceitar é essencial.</p>
+                    <button class="btn-continue" id="btnContinueSimulator">Próxima Fase <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 8: RAIO-X DO CORPO ==================== -->
+    <section class="section body-section" id="bodySection">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FASE 5: RAIO-X DO CORPO</span>
+                <h2 class="section-title">Análise do Organismo</h2>
+                <p class="section-desc">Clique nas áreas do corpo para investigar os impactos.</p>
+            </div>
+            
+            <div class="body-container">
+                <div class="body-figure">
+                    <svg viewBox="0 0 200 400" class="body-svg">
+                        <!-- Body outline -->
+                        <path class="body-outline" d="M100,30 C120,30 135,45 135,65 C135,85 125,95 125,95 L130,110 L155,130 L170,175 L155,180 L140,155 L135,180 L140,280 L130,380 L115,380 L105,280 L100,250 L95,280 L85,380 L70,380 L60,280 L65,180 L60,155 L45,180 L30,175 L45,130 L70,110 L75,95 C75,95 65,85 65,65 C65,45 80,30 100,30 Z"/>
+                        
+                        <!-- Clickable areas -->
+                        <circle class="body-point brain" cx="100" cy="50" r="20" data-area="brain"/>
+                        <circle class="body-point throat" cx="100" cy="100" r="15" data-area="throat"/>
+                        <circle class="body-point heart" cx="90" cy="140" r="18" data-area="heart"/>
+                        <circle class="body-point lungs" cx="100" cy="165" r="25" data-area="lungs"/>
+                        <circle class="body-point decision" cx="100" cy="220" r="20" data-area="decision"/>
+                    </svg>
+                    
+                    <div class="body-labels">
+                        <span class="body-label" style="top: 8%; left: 65%;">Cérebro</span>
+                        <span class="body-label" style="top: 22%; left: 65%;">Boca e Garganta</span>
+                        <span class="body-label" style="top: 32%; left: 15%;">Coração</span>
+                        <span class="body-label" style="top: 38%; left: 65%;">Pulmões</span>
+                        <span class="body-label" style="top: 52%; left: 65%;">Sistema de Decisão</span>
+                    </div>
+                </div>
+                
+                <div class="body-info" id="bodyInfo">
+                    <div class="info-placeholder">
+                        <i class="fas fa-hand-pointer"></i>
+                        <p>Selecione uma área do corpo para investigar</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 9: ESCAPE DA NÉVOA (GAME) ==================== -->
+    <section class="section game-section" id="gameSection">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FASE 6: ESCAPE DA NÉVOA</span>
+                <h2 class="section-title">Mini-Game Avançado</h2>
+                <p class="section-desc">Use as setas do teclado ou WASD para mover. Desvie dos obstáculos e chegue à Escolha Consciente!</p>
+            </div>
+            
+            <div class="game-container">
+                <div class="game-stats">
+                    <span class="game-stat">
+                        <i class="fas fa-heart"></i> HP: 
+                        <div class="hp-bar">
+                            <div class="hp-bar-fill" id="hpBarFill"></div>
+                        </div>
+                        <span id="gameHP">100%</span>
+                    </span>
+                    <span class="game-stat"><i class="fas fa-clock"></i> Tempo: <span id="gameTime">0s</span></span>
+                    <span class="game-stat"><i class="fas fa-exclamation-triangle"></i> Colisões: <span id="gameCollisions">0</span></span>
+                    <button class="btn-sound" id="btnGameSound" title="Ativar/Desativar Som">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </div>
+                
+                <div class="game-board" id="gameBoard">
+                    <div class="game-start" id="gameStart">
+                        <div class="game-start-icon"><i class="fas fa-bolt"></i></div>
+                        <h3>Escape da Névoa</h3>
+                        <p>Desvie dos obstáculos que representam influências negativas e chegue até a <strong>Escolha Consciente</strong>!</p>
+                        <p class="game-features-list">
+                            <span><i class="fas fa-heart"></i> Sistema de HP</span>
+                            <span><i class="fas fa-ghost"></i> Obstáculos Móveis</span>
+                            <span><i class="fas fa-volume-up"></i> Efeitos Sonoros</span>
+                        </p>
+                        <button class="btn-game-start" id="btnGameStart">
+                            <i class="fas fa-play"></i> Iniciar Jogo
+                        </button>
+                    </div>
+                    <canvas id="gameCanvas" width="600" height="400"></canvas>
+                </div>
+                
+                <div class="game-message" id="gameMessage" style="display: none;">
+                    <p id="gameMessageText"></p>
+                </div>
+                
+                <div class="game-complete" id="gameComplete" style="display: none;">
+                    <div class="complete-icon"><i class="fas fa-trophy"></i></div>
+                    <h3>Você Escapou da Névoa!</h3>
+                    <p>Sua consciência crítica aumentou.</p>
+                    <div class="game-final-stats">
+                        <span><i class="fas fa-clock"></i> Tempo: <span id="finalTime">0s</span></span>
+                        <span><i class="fas fa-exclamation-triangle"></i> Colisões: <span id="finalCollisions">0</span></span>
+                    </div>
+                    <p class="high-score" id="highScoreDisplay" style="display: none;"></p>
+                    <div class="game-complete-buttons">
+                        <button class="btn-game-restart" onclick="window.restartVaporGame()">
+                            <i class="fas fa-redo"></i> Jogar Novamente
+                        </button>
+                        <button class="btn-continue" id="btnContinueGame">Próxima Fase <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+                
+                <div class="game-lost" id="gameLost" style="display: none;">
+                    <div class="complete-icon lost"><i class="fas fa-cloud"></i></div>
+                    <h3>A Névoa Venceu...</h3>
+                    <p>As influências foram muito fortes, mas você pode tentar novamente!</p>
+                    <div class="game-lost-tip">
+                        <i class="fas fa-brain"></i>
+                        <span>Lembre-se: na vida real, informação e pensamento crítico são suas melhores defesas.</span>
+                    </div>
+                    <button class="btn-game-restart" onclick="window.restartVaporGame()">
+                        <i class="fas fa-redo"></i> Tentar Novamente
+                    </button>
+                </div>
+                
+                <div class="mobile-controls" id="mobileControls">
+                    <button class="control-btn" data-dir="up"><i class="fas fa-chevron-up"></i></button>
+                    <div class="control-row">
+                        <button class="control-btn" data-dir="left"><i class="fas fa-chevron-left"></i></button>
+                        <button class="control-btn" data-dir="right"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <button class="control-btn" data-dir="down"><i class="fas fa-chevron-down"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 10: LIXO INVISÍVEL ==================== -->
+    <section class="section trash-section" id="trashSection">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FASE 7: LIXO INVISÍVEL</span>
+                <h2 class="section-title">A fumaça some, mas o descarte fica.</h2>
+                <p class="section-desc">Arraste cada componente para a lixeira correta.</p>
+            </div>
+            
+            <div class="trash-container">
+                <div class="trash-items" id="trashItems">
+                    <div class="trash-item" draggable="true" data-type="electronic">
+                        <i class="fas fa-battery-full"></i>
+                        <span>Bateria</span>
+                    </div>
+                    <div class="trash-item" draggable="true" data-type="recyclable">
+                        <i class="fas fa-recycle"></i>
+                        <span>Plástico</span>
+                    </div>
+                    <div class="trash-item" draggable="true" data-type="recyclable">
+                        <i class="fas fa-cog"></i>
+                        <span>Metal</span>
+                    </div>
+                    <div class="trash-item" draggable="true" data-type="electronic">
+                        <i class="fas fa-microchip"></i>
+                        <span>Circuito</span>
+                    </div>
+                    <div class="trash-item" draggable="true" data-type="dangerous">
+                        <i class="fas fa-vial"></i>
+                        <span>Cartucho</span>
+                    </div>
+                    <div class="trash-item" draggable="true" data-type="common">
+                        <i class="fas fa-box"></i>
+                        <span>Embalagem</span>
+                    </div>
+                    <div class="trash-item" draggable="true" data-type="dangerous">
+                        <i class="fas fa-biohazard"></i>
+                        <span>Resíduo químico</span>
+                    </div>
+                </div>
+                
+                <div class="trash-bins">
+                    <div class="trash-bin" data-bin="electronic">
+                        <i class="fas fa-plug"></i>
+                        <span>Lixo Eletrônico</span>
+                    </div>
+                    <div class="trash-bin" data-bin="recyclable">
+                        <i class="fas fa-recycle"></i>
+                        <span>Reciclável</span>
+                    </div>
+                    <div class="trash-bin" data-bin="dangerous">
+                        <i class="fas fa-skull-crossbones"></i>
+                        <span>Descarte Perigoso</span>
+                    </div>
+                    <div class="trash-bin" data-bin="common">
+                        <i class="fas fa-trash"></i>
+                        <span>Lixo Comum</span>
+                    </div>
+                </div>
+                
+                <div class="trash-score">
+                    <span>Acertos: <span id="trashCorrect">0</span>/7</span>
+                </div>
+                
+                <div class="trash-complete" id="trashComplete" style="display: none;">
+                    <div class="complete-icon"><i class="fas fa-leaf"></i></div>
+                    <h3>Descarte Correto!</h3>
+                    <p>Você aprendeu sobre o impacto ambiental desses produtos.</p>
+                    <button class="btn-continue" id="btnContinueTrash">Próxima Fase <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 11: LINHA DO TEMPO ==================== -->
+    <section class="section timeline-section" id="timelineSection">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FASE 8: LINHA DO TEMPO</span>
+                <h2 class="section-title">Da Fumaça ao Neon</h2>
+                <p class="section-desc">A evolução da aparência e da percepção.</p>
+            </div>
+            
+            <div class="timeline-container">
+                <div class="timeline-track" id="timelineTrack">
+                    <div class="timeline-item" data-aos="fade-right">
+                        <div class="timeline-icon"><i class="fas fa-smoking"></i></div>
+                        <div class="timeline-content">
+                            <h3>Cigarro Convencional</h3>
+                            <p>Produto com fumaça visível, cheiro forte e aparência associada ao perigo.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-aos="fade-left">
+                        <div class="timeline-icon"><i class="fas fa-ad"></i></div>
+                        <div class="timeline-content">
+                            <h3>Propagandas Antigas</h3>
+                            <p>Marketing associava o produto a status, liberdade e sofisticação.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-aos="fade-right">
+                        <div class="timeline-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div class="timeline-content">
+                            <h3>Alertas de Saúde</h3>
+                            <p>Campanhas e estudos revelaram os riscos, mudando a percepção pública.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-aos="fade-left">
+                        <div class="timeline-icon"><i class="fas fa-bolt"></i></div>
+                        <div class="timeline-content">
+                            <h3>Cigarro Eletrônico</h3>
+                            <p>Surge como alternativa "moderna", com design tecnológico e sem fumaça visível.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-aos="fade-right">
+                        <div class="timeline-icon"><i class="fas fa-palette"></i></div>
+                        <div class="timeline-content">
+                            <h3>Sabores e Cores</h3>
+                            <p>Produtos ganham sabores doces e visuais coloridos, atraindo curiosidade.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-aos="fade-left">
+                        <div class="timeline-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <div class="timeline-content">
+                            <h3>Influência Digital</h3>
+                            <p>Redes sociais amplificam a exposição e normalização do uso.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-aos="fade-right">
+                        <div class="timeline-icon"><i class="fas fa-brain"></i></div>
+                        <div class="timeline-content">
+                            <h3>Consciência Crítica</h3>
+                            <p>A informação se torna ferramenta de prevenção e pensamento crítico.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 12: MAPA MENTAL ==================== -->
+    <section class="section mindmap-section" id="mindmapSection">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FASE 8.5: MAPA DA NÉVOA</span>
+                <h2 class="section-title">Conexões do Tema</h2>
+                <p class="section-desc">Clique nas bolhas para explorar cada aspecto.</p>
+            </div>
+            
+            <div class="mindmap-container">
+                <div class="mindmap-center">
+                    <span>Cigarro Eletrônico</span>
+                </div>
+                
+                <div class="mindmap-nodes">
+                    <div class="mindmap-node" data-topic="design" style="--angle: 0deg;">
+                        <i class="fas fa-paint-brush"></i>
+                        <span>Design</span>
+                    </div>
+                    <div class="mindmap-node" data-topic="sabores" style="--angle: 36deg;">
+                        <i class="fas fa-candy-cane"></i>
+                        <span>Sabores</span>
+                    </div>
+                    <div class="mindmap-node" data-topic="nicotina" style="--angle: 72deg;">
+                        <i class="fas fa-pills"></i>
+                        <span>Nicotina</span>
+                    </div>
+                    <div class="mindmap-node" data-topic="influencia" style="--angle: 108deg;">
+                        <i class="fas fa-users"></i>
+                        <span>Influência Social</span>
+                    </div>
+                    <div class="mindmap-node" data-topic="marketing" style="--angle: 144deg;">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>Marketing</span>
+                    </div>
+                    <div class="mindmap-node" data-topic="ambiente" style="--angle: 180deg;">
+                        <i class="fas fa-leaf"></i>
+                        <span>Meio Ambiente</span>
+                    </div>
+                    <div class="mindmap-node" data-topic="legislacao" style="--angle: 216deg;">
+                        <i class="fas fa-gavel"></i>
+                        <span>Legislação</span>
+                    </div>
+                    <div class="mindmap-node" data-topic="saude" style="--angle: 252deg;">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Saúde</span>
+                    </div>
+                    <div class="mindmap-node" data-topic="percepcao" style="--angle: 288deg;">
+                        <i class="fas fa-eye"></i>
+                        <span>Percepção de Risco</span>
+                    </div>
+                    <div class="mindmap-node" data-topic="comparacao" style="--angle: 324deg;">
+                        <i class="fas fa-balance-scale"></i>
+                        <span>Comparação</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 13: QUIZ FINAL ==================== -->
+    <section class="section quiz-section" id="quizSection">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FASE 9: QUIZ FINAL</span>
+                <h2 class="section-title">Teste de Conhecimento</h2>
+                <p class="section-desc">Responda as 10 perguntas para finalizar a investigação.</p>
+            </div>
+            
+            <div class="quiz-container" id="quizContainer">
+                <div class="quiz-progress">
+                    <span id="quizProgress">Pergunta 1/10</span>
+                    <div class="quiz-progress-bar">
+                        <div class="quiz-progress-fill" id="quizProgressFill"></div>
+                    </div>
+                </div>
+                
+                <div class="quiz-question" id="quizQuestion">
+                    <h3 id="questionText">Cigarro eletrônico é apenas vapor d'água?</h3>
+                    <div class="quiz-options" id="quizOptions">
+                        <button class="quiz-option" data-answer="false">Não</button>
+                        <button class="quiz-option" data-answer="true">Sim</button>
+                    </div>
+                </div>
+                
+                <div class="quiz-complete" id="quizComplete" style="display: none;">
+                    <div class="complete-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3 id="quizResultTitle">Resultado</h3>
+                    <p id="quizResultText"></p>
+                    <div class="quiz-score">
+                        <span>Pontuação: <span id="quizScore">0</span>/10</span>
+                    </div>
+                    <button class="btn-continue" id="btnContinueQuiz">Ver Ranking <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 14: RANKING ==================== -->
+    <section class="section ranking-section" id="rankingSection">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FASE 10: RANKING</span>
+                <h2 class="section-title">Ranking da Feira</h2>
+                <p class="section-desc">Veja como você se compara com outros investigadores.</p>
+            </div>
+            
+            <div class="ranking-container">
+                <div class="ranking-input" id="rankingInput">
+                    <label>Digite seu nome ou apelido:</label>
+                    <input type="text" id="playerName" maxlength="20" placeholder="Seu nome">
+                    <button class="btn-save-score" id="btnSaveScore">
+                        <i class="fas fa-save"></i> Salvar Pontuação
+                    </button>
+                </div>
+                
+                <div class="ranking-list" id="rankingList">
+                    <div class="ranking-header">
+                        <span>#</span>
+                        <span>Nome</span>
+                        <span>Pontos</span>
+                    </div>
+                    <div class="ranking-entries" id="rankingEntries">
+                        <!-- Entries will be inserted here -->
+                    </div>
+                </div>
+                
+                <div class="ranking-actions">
+                    <button class="btn-clear-ranking" id="btnClearRanking">
+                        <i class="fas fa-trash"></i> Limpar Ranking
+                    </button>
+                    <button class="btn-continue" id="btnContinueRanking">
+                        Gerar Certificado <i class="fas fa-certificate"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 15: CERTIFICATE ==================== -->
+    <section class="section certificate-section" id="certificateSection">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">CONCLUSÃO</span>
+                <h2 class="section-title">Certificado de Participação</h2>
+                <p class="section-desc">Você concluiu a experiência Vapor.exe!</p>
+            </div>
+            
+            <div class="certificate-container">
+                <div class="certificate-preview" id="certificatePreview">
+                    <div class="certificate-border">
+                        <div class="certificate-content">
+                            <div class="certificate-header">
+                                <i class="fas fa-award"></i>
+                                <h2>Certificado de Participação</h2>
+                            </div>
+                            <p class="certificate-text">Esta pessoa concluiu a experiência</p>
+                            <h3 class="certificate-title">Vapor.exe: Quando o perigo ganha design</h3>
+                            <p class="certificate-description">
+                                Durante a atividade, aprendeu sobre cigarro eletrônico, cigarro convencional, 
+                                influência social, percepção de risco, saúde, meio ambiente e conscientização.
+                            </p>
+                            <div class="certificate-name" id="certificateName">Participante</div>
+                            <div class="certificate-footer">
+                                <span>Feira de Ciências</span>
+                                <span id="certificateDate"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn-download-cert" id="btnDownloadCert">
+                    <i class="fas fa-download"></i> Baixar Certificado (PDF)
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 16: SHARE CARD ==================== -->
+    <section class="section share-section" id="shareSection">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">COMPARTILHE</span>
+                <h2 class="section-title">Espalhe a Consciência</h2>
+                <p class="section-desc">Escolha uma frase e compartilhe com seus amigos.</p>
+            </div>
+            
+            <div class="share-container">
+                <div class="share-phrases">
+                    <button class="phrase-btn active" data-phrase="O corpo não vê neon.">O corpo não vê neon.</button>
+                    <button class="phrase-btn" data-phrase="Sabor não é segurança.">Sabor não é segurança.</button>
+                    <button class="phrase-btn" data-phrase="Nem todo risco tem cheiro.">Nem todo risco tem cheiro.</button>
+                    <button class="phrase-btn" data-phrase="A fumaça some, a consequência fica.">A fumaça some, a consequência fica.</button>
+                    <button class="phrase-btn" data-phrase="Aparência não é evidência.">Aparência não é evidência.</button>
+                    <button class="phrase-btn" data-phrase="Informação é prevenção.">Informação é prevenção.</button>
+                </div>
+                
+                <div class="share-card-preview" id="shareCardPreview">
+                    <div class="share-card">
+                        <div class="share-card-bg"></div>
+                        <span class="share-card-logo">VAPOR.EXE</span>
+                        <p class="share-card-phrase" id="shareCardPhrase">"O corpo não vê neon."</p>
+                        <span class="share-card-footer">Quando o perigo ganha design</span>
+                    </div>
+                </div>
+                
+                <button class="btn-copy-phrase" id="btnCopyPhrase">
+                    <i class="fas fa-copy"></i> Copiar Frase
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 17: QR CODE ==================== -->
+    <section class="section qr-section" id="qrSection">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">ACESSE</span>
+                <h2 class="section-title">Acesse no seu celular</h2>
+                <p class="section-desc">Escaneie o QR Code para acessar o Vapor.exe.</p>
+            </div>
+            
+            <div class="qr-container">
+                <div class="qr-code" id="qrCode"></div>
+                <p class="qr-text">Escaneie para acessar</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 18: ACHIEVEMENTS ==================== -->
+    <section class="section achievements-section" id="achievementsSection">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">CONQUISTAS</span>
+                <h2 class="section-title">Suas Conquistas</h2>
+                <p class="section-desc">Medalhas desbloqueadas durante a investigação.</p>
+            </div>
+            
+            <div class="achievements-grid" id="achievementsGrid">
+                <div class="achievement-card" data-achievement="myth-hunter">
+                    <div class="achievement-icon locked"><i class="fas fa-search"></i></div>
+                    <h4>Caçador de Mitos</h4>
+                    <p>Complete o Scanner de Mentiras</p>
+                </div>
+                <div class="achievement-card" data-achievement="body-investigator">
+                    <div class="achievement-icon locked"><i class="fas fa-user-md"></i></div>
+                    <h4>Investigador do Corpo</h4>
+                    <p>Explore todas as áreas do Raio-X</p>
+                </div>
+                <div class="achievement-card" data-achievement="environment-defender">
+                    <div class="achievement-icon locked"><i class="fas fa-leaf"></i></div>
+                    <h4>Defensor do Ambiente</h4>
+                    <p>Complete o Lixo Invisível</p>
+                </div>
+                <div class="achievement-card" data-achievement="scanner-master">
+                    <div class="achievement-icon locked"><i class="fas fa-shield-alt"></i></div>
+                    <h4>Mestre do Scanner</h4>
+                    <p>Obtenha 100% no Scanner</p>
+                </div>
+                <div class="achievement-card" data-achievement="fog-escape">
+                    <div class="achievement-icon locked"><i class="fas fa-running"></i></div>
+                    <h4>Saiu da Névoa</h4>
+                    <p>Complete o mini-game</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="glitch-text" data-text="VAPOR.EXE">VAPOR.EXE</span>
+                    <p>Quando o perigo ganha design</p>
+                </div>
+                <div class="footer-message">
+                    <p>"O cigarro convencional mostra a fumaça.<br>O eletrônico esconde o risco no design."</p>
+                </div>
+                <div class="footer-info">
+                    <p>Feira de Ciências 2024</p>
+                    <p>Projeto educacional de conscientização</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Body Info -->
+    <div class="modal" id="bodyModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+            <div class="modal-icon" id="modalIcon"></div>
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <p class="modal-subtitle" id="modalSubtitle"></p>
+            <p class="modal-text" id="modalText"></p>
+        </div>
+    </div>
+
+    <!-- Modal for Mindmap -->
+    <div class="modal" id="mindmapModal">
+        <div class="modal-content">
+            <button class="modal-close" id="mindmapModalClose"><i class="fas fa-times"></i></button>
+            <div class="modal-icon" id="mindmapModalIcon"></div>
+            <h3 class="modal-title" id="mindmapModalTitle"></h3>
+            <p class="modal-text" id="mindmapModalText"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/scanner.js"></script>
+    <script src="assets/js/influence.js"></script>
+    <script src="assets/js/game.js"></script>
+    <script src="assets/js/drag-drop.js"></script>
+    <script src="assets/js/quiz.js"></script>
+    <script src="assets/js/ranking.js"></script>
+    <script src="assets/js/certificate.js"></script>
+    <script src="assets/js/bot.js"></script>
+</body>
+</html>
